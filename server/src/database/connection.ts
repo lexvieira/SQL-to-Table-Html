@@ -3,9 +3,9 @@ import knex from 'knex';
 const connection = knex({
     client: 'mssql',
     connection: {
-      host : 'localhost',
+      host : '192.168.1.70',
       user : 'SA',
-      password : 'JHu@hGTWSK@9t63',
+      password : 'PASSWORD',
       database : 'MY_DB'
     }
 });
