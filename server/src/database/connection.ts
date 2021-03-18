@@ -5,10 +5,12 @@ const connection = knex({
     connection: {
       host : '192.168.1.70',
       user : 'SA',
-      password : 'PASSWORD',
+      password : 'JHu@hGTWSK@9t63',
       database : 'MY_DB'
     }
 });
   
+
+
 export default connection;
   
