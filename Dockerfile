@@ -1,14 +1,12 @@
-FROM node:12.14.1
+FROM node:12.20.2
 
 WORKDIR /opt/ui
 
-EXPOSE 3333 3000 19000 19001 19002 19006
-
 RUN apt-get update 
 
-RUN yarn global add expo-cli
+RUN npm install -g expo-cli
 
-ENV PATH="$(yarn global bin):$PATH"
+ENV PATH="$(npm global bin):$PATH"
 
 USER 1000
 

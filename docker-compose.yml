@@ -1,29 +1,31 @@
 version: "3.5"
 services: 
-  backend:
-    container_name: backend_1
-    build: 
-      context: .
-      dockerfile: Dockerfile
+  nlw1_backend:
+    container_name: nlw1_backend
+    image: node:12.20.2
     ports: 
-      - 81:3333
+      - 3333:3333
     volumes: 
       - ${PWD}/server:/opt/ui
-    command: yarn dev
-  frontend:
-    container_name: frontend_1
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    command: npm run dev
+    depends_on: 
+      - "sqlserver"
+    working_dir: /opt/ui
+    user: "1000"
+  nlw1_frontend:
+    container_name: nlw1_frontend
+    image: node:12.20.2 
     ports:
-      - 80:3000
+      - 3000:3000
     volumes: 
       - ${PWD}/web:/opt/ui
-    command: yarn start
+    command: npm run start
     depends_on: 
-      - "backend"      
-  expo:
-    container_name: expo-android_1
+      - "nlw1_backend"  
+    working_dir: /opt/ui
+    user: "1000"    
+  nlw1_expo:
+    container_name: nlw1_expo
     build: 
       context: .
       dockerfile: Dockerfile
@@ -35,6 +37,16 @@ services:
       - 19006:19006
     volumes:
       - ${PWD}/mobile:/opt/ui
-    command: yarn start
+    command: npm run start
     depends_on: 
-      - "backend"      
+      - "nlw1_backend"
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    container_name: sqlserver2017
+    environment:
+        SA_PASSWORD: "JHu@hGTWSK@9t63"
+        ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"      
+    volumes: 
+      - ../DockerSqlserver/data/sqlserver:/var/opt/mssql
