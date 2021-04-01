@@ -4,7 +4,7 @@ services:
     container_name: nlw1_backend
     image: node:12.20.2
     ports: 
-      - 3333:3333
+      - 81:3333
     volumes: 
       - ${PWD}/server:/opt/ui
     command: npm run dev
@@ -16,7 +16,7 @@ services:
     container_name: nlw1_frontend
     image: node:12.20.2 
     ports:
-      - 3000:3000
+      - 80:3000
     volumes: 
       - ${PWD}/web:/opt/ui
     command: npm run start
